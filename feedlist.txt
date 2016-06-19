@@ -1,0 +1,3 @@
+https://weblogs.asp.net/scottgu/rss?containerid=13
+http://www.michael-noll.com/atom.xml
+https://kiwitobes.com/feed/
