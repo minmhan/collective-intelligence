@@ -125,11 +125,37 @@ def crossvalidate(algf,data,trials=100,test=0.05):
         error+=testalgorithm(algf,trainset,testset)
     return error/trials
     
+def wineset2():
+    rows=[]
+    for i in range(300):
+        # Create a random age and rating
+        rating=random()*50+50
+        age=random()*50
+        aisle=float(randint(1,20))
+        bottlesize=[375.0,750.0,1500.0,3000.0][randint(0,3)]
+        price=wineprice(rating,age)
+        price*=(bottlesize/750)
+        #Add some noise
+        price*=(random()*0.9+0.2)
+        
+        # Add to dataset
+        rows.append({'input':(rating,age,aisle,bottlesize), 'result':price})
+        
+    return rows
+    
+def rescale(data,scale):
+    scaleddata=[]
+    for row in data:
+        scaled=[scale[i]*row['input'][i] for i in range(len(scale))]
+        scaleddata.append({'input':scaled,'result':row['result']})
+    return scaleddata
 
 
+def createcostfunction(algf,data):
+    pass
 
 #print(wineprice(95.0,3.0))
-data = wineset1()
+data = wineset2()
 #print(data[0]['input'])
 #print(data[1]['input'])
 #print(euclidean(data[0]['input'], data[1]['input']))
@@ -138,7 +164,8 @@ data = wineset1()
 #print(inverseweight(0.1))
 #print(gaussian(0.1))
 #print(weightedknn(data,(99.0,5.0)))
-print(crossvalidate(weightedknn,data))
+sdata=rescale(data,[10,10,0,0.5])
+print(crossvalidate(weightedknn,sdata))
 
 
 
