@@ -36,6 +36,8 @@ def sim_distance(prefs,person1,person2):
 
 
 # Returns the pearson correlation coefficient for p1 and p2
+# correlation val range(+1 to -1)
+# +1 -> perfect correlation, -1->negative correlation, 0->no linear correlation
 def sim_pearson(prefs,p1,p2):
     si={}
     for item in prefs[p1]:
